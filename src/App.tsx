@@ -3,7 +3,7 @@ import { css, jsx, keyframes } from "@emotion/core";
 import React from "react";
 import logo from "./logo.svg";
 
-const App: React.FC = () => {
+export const App: React.FC = () => {
   return (
     <div css={containerCss}>
       <header css={headerCss}>
@@ -53,5 +53,3 @@ const headerCss = css({
 });
 
 const linkCss = css({ color: "#61dafb" });
-
-export default App;
