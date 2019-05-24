@@ -3,6 +3,27 @@ import { css, jsx, keyframes } from "@emotion/core";
 import React from "react";
 import logo from "./logo.svg";
 
+const App: React.FC = () => {
+  return (
+    <div css={containerCss}>
+      <header css={headerCss}>
+        <img src={logo} css={logoCss} alt="logo" />
+        <p>
+          Edit <code>src/App.tsx</code> and save to reload.
+        </p>
+        <a
+          css={linkCss}
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
+};
+
 const containerCss = css({
   textAlign: "center"
 });
@@ -32,26 +53,5 @@ const headerCss = css({
 });
 
 const linkCss = css({ color: "#61dafb" });
-
-const App: React.FC = () => {
-  return (
-    <div css={containerCss}>
-      <header css={headerCss}>
-        <img src={logo} css={logoCss} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          css={linkCss}
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-};
 
 export default App;
