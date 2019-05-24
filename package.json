@@ -18,7 +18,8 @@
     "build": "react-scripts build",
     "test": "run-s test:*",
     "test:react-scripts": "react-scripts test",
-    "fmt": "prettier --write '**/*.{js,jsx,ts,tsx,json,md}' --ignore-path .gitignore"
+    "fmt": "prettier --write '**/*.{js,jsx,ts,tsx,json,md}' --ignore-path .gitignore",
+    "test:fmt": "prettier --list-different '**/*.{js,jsx,ts,tsx,json,md}' --ignore-path .gitignore"
   },
   "eslintConfig": {
     "extends": "react-app"
