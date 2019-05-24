@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import {css, jsx, keyframes} from "@emotion/core";
-import React from 'react';
-import logo from './logo.svg';
+import { css, jsx, keyframes } from "@emotion/core";
+import React from "react";
+import logo from "./logo.svg";
 
 const containerCss = css({
   textAlign: "center"
