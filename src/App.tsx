@@ -1,7 +1,7 @@
 import { css, keyframes } from "emotion";
 import React from "react";
 import logo from "./logo.svg";
-import {GameOfLifeCanvas} from "./GameOfLifeCanvas";
+import { GameOfLifeCanvas } from "./GameOfLifeCanvas";
 
 export const App: React.FC = () => {
   return (
@@ -19,7 +19,7 @@ export const App: React.FC = () => {
         >
           Learn React
         </a>
-        <GameOfLifeCanvas className={css({ margin: "10em" })}/>
+        <GameOfLifeCanvas className={css({ margin: "10em" })} />
       </header>
     </div>
   );

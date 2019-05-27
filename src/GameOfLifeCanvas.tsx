@@ -1,7 +1,10 @@
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 
 export interface Props {
-  className: string
+  className: string;
+  cellSize: number;
+  rows: number;
+  cols: number;
 }
 
 export const GameOfLifeCanvas: React.FunctionComponent<Props> = props => {
@@ -17,10 +20,5 @@ export const GameOfLifeCanvas: React.FunctionComponent<Props> = props => {
     }
   }, []);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className={props.className}
-    />
-  );
+  return <canvas ref={canvasRef} className={props.className} />;
 };
