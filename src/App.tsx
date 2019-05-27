@@ -1,24 +1,25 @@
-/** @jsx jsx */
-import { css, jsx, keyframes } from "@emotion/core";
+import { css, keyframes } from "emotion";
 import React from "react";
 import logo from "./logo.svg";
+import {GameOfLifeCanvas} from "./GameOfLifeCanvas";
 
 export const App: React.FC = () => {
   return (
-    <div css={containerCss}>
-      <header css={headerCss}>
-        <img src={logo} css={logoCss} alt="logo" />
+    <div className={containerCss}>
+      <header className={headerCss}>
+        <img src={logo} className={logoCss} alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <a
-          css={linkCss}
+          className={linkCss}
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
           Learn React
         </a>
+        <GameOfLifeCanvas className={css({ margin: "10em" })}/>
       </header>
     </div>
   );
