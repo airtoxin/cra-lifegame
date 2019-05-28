@@ -1,9 +1,18 @@
 import { css, keyframes } from "emotion";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import logo from "./logo.svg";
 import { GameOfLifeCanvas } from "./GameOfLifeCanvas";
 
 export const App: React.FC = () => {
+  const [size, setSize] = useState<number>(10);
+  useEffect(() => {
+    const id = setInterval(() => {
+      setSize(size + 1);
+    }, 300);
+
+    return () => clearInterval(id);
+  }, [size]);
+
   return (
     <div className={containerCss}>
       <header className={headerCss}>
@@ -19,7 +28,14 @@ export const App: React.FC = () => {
         >
           Learn React
         </a>
-        <GameOfLifeCanvas className={css({ margin: "10em" })} />
+        <GameOfLifeCanvas
+          cellSize={size}
+          state={{
+            xs: 10,
+            ys: 10,
+            values: {}
+          }}
+        />
       </header>
     </div>
   );

@@ -16,7 +16,7 @@ const createDefaultContext = () => {
   const gameOfLifeState: GameOfLifeState<boolean> = {
     xs: 10,
     ys: 10,
-    state: {
+    values: {
       99: cell
     }
   };
@@ -52,8 +52,8 @@ describe("setCell", () => {
 
     expect(setCell(gameOfLifeState, newCell)).toEqual({
       ...gameOfLifeState,
-      state: {
-        ...gameOfLifeState.state,
+      values: {
+        ...gameOfLifeState.values,
         0: newCell
       }
     });
@@ -68,7 +68,7 @@ describe("setCell", () => {
 
     expect(setCell(gameOfLifeState, updatedCell)).toEqual({
       ...gameOfLifeState,
-      state: {
+      values: {
         99: updatedCell
       }
     });
@@ -81,7 +81,7 @@ describe("removeCell", () => {
 
     expect(removeCell(gameOfLifeState, 9, 9)).toEqual({
       ...gameOfLifeState,
-      state: {}
+      values: {}
     });
   });
 

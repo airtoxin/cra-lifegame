@@ -3,7 +3,7 @@ import { Cell } from "./Cell";
 export type GameOfLifeState<T> = {
   xs: number;
   ys: number;
-  state: {
+  values: {
     [k: number]: Cell<T>;
   };
 };
@@ -23,14 +23,14 @@ export const getCell = <T>(
   self: GameOfLifeState<T>,
   x: number,
   y: number
-): Cell<T> | undefined => self.state[getStateMapKey(self.xs, x, y)];
+): Cell<T> | undefined => self.values[getStateMapKey(self.xs, x, y)];
 
 export const setCell = <T>(
   self: GameOfLifeState<T>,
   cell: Cell<T>
 ): GameOfLifeState<T> =>
   Object.assign({}, self, {
-    state: Object.assign({}, self.state, {
+    values: Object.assign({}, self.values, {
       [getStateMapKey(self.xs, cell.x, cell.y)]: cell
     })
   });
@@ -40,7 +40,7 @@ export const removeCell = <T>(
   x: number,
   y: number
 ): GameOfLifeState<T> => {
-  const state = Object.assign({}, self.state);
-  delete state[getStateMapKey(self.xs, x, y)];
-  return Object.assign({}, self, { state });
+  const values = Object.assign({}, self.values);
+  delete values[getStateMapKey(self.xs, x, y)];
+  return Object.assign({}, self, { values });
 };

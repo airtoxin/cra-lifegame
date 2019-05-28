@@ -1,24 +1,38 @@
-import React, { useEffect, useRef } from "react";
+import React, {useEffect, useMemo, useRef} from "react";
+import { GameOfLifeState } from "./structures/GameOfLifeState";
 
 export interface Props {
-  className: string;
   cellSize: number;
-  rows: number;
-  cols: number;
+  state: GameOfLifeState<boolean>;
 }
 
-export const GameOfLifeCanvas: React.FunctionComponent<Props> = props => {
+export const GameOfLifeCanvas: React.FunctionComponent<Props> = ({
+  cellSize,
+  state: { xs, ys, values }
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const canvas = canvasRef.current;
     if (canvas) {
       const ctx = canvas.getContext("2d");
       if (ctx) {
+        ctx.clearRect(
+          0,
+          0,
+          cellSize * xs,
+          cellSize * ys
+        );
+
         ctx.strokeStyle = "blue";
-        ctx.strokeText("青色でstrokText", 10, 25);
+
+        [...Array(ys)].forEach((_, y) => {
+          [...Array(xs)].forEach((_, x) => {
+            ctx.strokeRect(x * cellSize, y * cellSize, cellSize, cellSize);
+          });
+        });
       }
     }
-  }, []);
+  }, [xs, ys, cellSize]);
 
-  return <canvas ref={canvasRef} className={props.className} />;
+  return <canvas ref={canvasRef} width={500} height={500} style={{ backgroundColor: "white" }} />;
 };
