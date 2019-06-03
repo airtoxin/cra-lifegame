@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GameOfLifeState } from "./structures/GameOfLifeState";
-import { Sprite, Stage } from "@inlet/react-pixi";
-import * as PIXI from "pixi.js";
+import { Stage, Container } from "@inlet/react-pixi";
+import { RoundedRectangle } from "./components/pixi/RoundedRectangle";
 
 export interface Props {
   canvasSize: {
@@ -22,17 +22,22 @@ export const GameOfLifeCanvas: React.FunctionComponent<Props> = ({
 
   return (
     <Stage width={width} height={height}>
-      <Sprite
-        texture={PIXI.Texture.from("https://i.imgur.com/IaUrttj.png")}
-        interactive
-        buttonMode
-        x={x}
-        y={y}
-        pointerdown={() => {
-          setX(Math.random() * width);
-          setY(Math.random() * height);
-        }}
-      />
+      <Container>
+        <RoundedRectangle
+          fill={Math.random() * 0xffffff}
+          x={x}
+          y={y}
+          width={50}
+          height={50}
+          interactive
+          buttonMode
+          pointerDown={() => {
+            console.log("@1", 1);
+            setX(Math.random() * 500);
+            setY(Math.random() * 500);
+          }}
+        />
+      </Container>
     </Stage>
   );
 };
