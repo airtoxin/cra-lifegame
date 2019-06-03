@@ -7,7 +7,7 @@ export interface Props {
   y: number;
   width: number;
   height: number;
-  pointerDown?: (event: PIXI.interaction.InteractionEvent) => void;
+  onPointerDown?: (event: PIXI.interaction.InteractionEvent) => void;
   buttonMode?: boolean;
   interactive?: boolean;
 }
@@ -20,11 +20,11 @@ export const Rectangle = PixiComponent<Props, PIXI.Graphics>("Rectangle", {
     // apply custom logic on mount
   },
   willUnmount: (instance, parent) => {
-    instance.removeAllListeners("pointerdown");
+    instance.removeAllListeners();
   },
   applyProps: (instance, oldProps, newProps) => {
     instance.clear();
-    instance.lineStyle(1, newProps.fill);
+    instance.beginFill(newProps.fill);
     instance.drawRect(newProps.x, newProps.y, newProps.width, newProps.height);
     instance.endFill();
 
@@ -32,7 +32,7 @@ export const Rectangle = PixiComponent<Props, PIXI.Graphics>("Rectangle", {
     instance.interactive = newProps.interactive || false;
 
     instance.removeAllListeners();
-    if (newProps.pointerDown != null)
-      instance.on("pointerdown", newProps.pointerDown);
+    if (newProps.onPointerDown != null)
+      instance.on("pointerdown", newProps.onPointerDown);
   }
 });
