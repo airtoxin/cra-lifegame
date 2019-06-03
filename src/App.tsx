@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { getRandomGameOfLifeState } from "./structures/GameOfLifeState";
+import {getEmptyGameOfLifeState, getRandomGameOfLifeState} from "./structures/GameOfLifeState";
 import { useConwaysGameOfLife } from "./hooks/useConwaysGameOfLife";
 import { Field } from "./components/Field";
 
@@ -103,9 +103,16 @@ export const App: React.FC = () => {
       <button onClick={() => setRunning(!running)}>
         {running ? "stop" : "start"}
       </button>
-      <button onClick={() => setState(getRandomGameOfLifeState(SIZE, SIZE))}>
+      <button onClick={() => {
+        setState(getRandomGameOfLifeState(SIZE, SIZE));
+        setGeneration(1);
+      }}>
         reset
       </button>
+      <button onClick={() => {
+        setState(getEmptyGameOfLifeState(SIZE, SIZE));
+        setGeneration(1);
+      }}>initialize</button>
       <div>
         Preset:{" "}
         <select onChange={handleChangePreset}>
