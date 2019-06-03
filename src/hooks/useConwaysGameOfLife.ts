@@ -1,5 +1,5 @@
 import {GameOfLifeState} from "../structures/GameOfLifeState";
-import {useCallback} from "react";
+import {useCallback, useMemo} from "react";
 import {Cell, cellProperties} from "../structures/Cell";
 
 const neighbourCellCoordinates = [
@@ -14,8 +14,18 @@ const neighbourCellCoordinates = [
   [1, 1]
 ];
 
-export const useConwaysGameOfLife = (state: GameOfLifeState) => {
+const parseRuleString = (rule: string) => {
+  const bornString = rule.split("/")[0];
+  const surviveString = rule.split("/")[1];
+
+  return (current: number, counts: number): 0 | 1 => current ?
+    ~~surviveString.includes(counts.toString()) as 0 | 1 : ~~bornString.includes(counts.toString()) as 0 | 1;
+};
+
+export const useConwaysGameOfLife = (state: GameOfLifeState, ruleString: string) => {
+
   const evolve = useCallback((): GameOfLifeState => {
+    const getNext = parseRuleString(ruleString);
     let newCells = [];
 
     for (let row = 0; row < state.rows; row++) {
@@ -27,7 +37,7 @@ export const useConwaysGameOfLife = (state: GameOfLifeState) => {
           const cell = state.cells[(row + y + state.rows) % state.rows][(col + x + state.cols) % state.cols];
           sum += cell[cellProperties.Value];
         }
-        const newCell: Cell = sum === 3 ? [1] : sum <= 1 || sum >= 4 ? [0] : state.cells[row][col];
+        const newCell: Cell = [getNext(state.cells[row][col][cellProperties.Value], sum)];
         rowCells.push(newCell);
       }
       newCells.push(rowCells);
@@ -38,7 +48,7 @@ export const useConwaysGameOfLife = (state: GameOfLifeState) => {
       cols: state.cols,
       cells: newCells
     };
-  }, [state]);
+  }, [state, ruleString]);
 
   return {
     evolve
