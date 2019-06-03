@@ -1,23 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { GameOfLifeCanvas } from "./GameOfLifeCanvas";
-import {GameOfLifeState} from "./structures/GameOfLifeState";
+import React, {useEffect, useState} from "react";
+import {getRandomGameOfLifeState} from "./structures/GameOfLifeState";
+import {useConwaysGameOfLife} from "./hooks/useConwaysGameOfLife";
+import {Field} from "./components/Field";
+
+const SIZE = 100;
+const CELL_SIZE = 4;
 
 export const App: React.FC = () => {
-  const [state, setState] = useState<GameOfLifeState<boolean>>({
-    xs: 100,
-    ys: 100,
-    values: {}
-  });
+  const [generation, setGeneration] = useState(1);
+  const [running, setRunning] = useState(false);
+  const [state, setState] = useState(getRandomGameOfLifeState(SIZE, SIZE));
+  const { evolve } = useConwaysGameOfLife(state);
+
+  useEffect(() => {
+    if (running) {
+      setGeneration(generation + 1);
+      setState(evolve());
+    }
+  }, [running, generation]);
 
   return (
-    <GameOfLifeCanvas
-      canvasSize={{
-        width: 500,
-        height: 500
-      }}
-      cellSize={5}
-      state={state}
-      onUpdateState={setState}
-    />
+    <div>
+      <Field
+        canvas={{
+          width: SIZE * CELL_SIZE,
+          height: SIZE * CELL_SIZE
+        }}
+        cellSize={CELL_SIZE}
+        state={state}
+      />
+      <button
+        onClick={() => setRunning(!running)}
+      >{running ? "stop" : "start"}</button>
+      <div>gen: {generation}</div>
+    </div>
   );
 };
