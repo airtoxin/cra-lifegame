@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { GameOfLifeState } from "./structures/GameOfLifeState";
-import { Stage, Container } from "@inlet/react-pixi";
-import { RoundedRectangle } from "./components/pixi/RoundedRectangle";
+import React from "react";
+import {GameOfLifeState} from "./structures/GameOfLifeState";
+import {Stage} from "@inlet/react-pixi";
+import {Rectangle} from "./components/pixi/Rectangle";
 
 export interface Props {
   canvasSize: {
@@ -17,27 +17,22 @@ export const GameOfLifeCanvas: React.FunctionComponent<Props> = ({
   cellSize,
   state: { xs, ys, values }
 }) => {
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
-
   return (
     <Stage width={width} height={height}>
-      <Container>
-        <RoundedRectangle
-          fill={Math.random() * 0xffffff}
-          x={x}
-          y={y}
-          width={50}
-          height={50}
-          interactive
-          buttonMode
-          pointerDown={() => {
-            console.log("@1", 1);
-            setX(Math.random() * 500);
-            setY(Math.random() * 500);
-          }}
-        />
-      </Container>
+      {
+        [...Array(ys)].map((_, gridY) => [...Array(xs)].map((_, gridX) => (
+          <Rectangle
+            key={`${gridX}_${gridY}`}
+            fill={Math.random() * 0xffffff}
+            x={gridX * cellSize}
+            y={gridY * cellSize}
+            width={cellSize}
+            height={cellSize}
+            interactive
+            buttonMode
+          />
+        )))
+      }
     </Stage>
   );
 };

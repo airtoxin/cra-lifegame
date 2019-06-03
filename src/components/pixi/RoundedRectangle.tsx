@@ -27,7 +27,7 @@ export const RoundedRectangle = PixiComponent<Props, PIXI.Graphics>(
     },
     applyProps: (instance, oldProps, newProps) => {
       instance.clear();
-      instance.beginFill(newProps.fill);
+      instance.lineStyle(1, newProps.fill);
       instance.drawRoundedRect(
         newProps.x,
         newProps.y,

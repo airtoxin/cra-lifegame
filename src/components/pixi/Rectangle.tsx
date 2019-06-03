@@ -24,7 +24,7 @@ export const Rectangle = PixiComponent<Props, PIXI.Graphics>("Rectangle", {
   },
   applyProps: (instance, oldProps, newProps) => {
     instance.clear();
-    instance.beginFill(newProps.fill);
+    instance.lineStyle(1, newProps.fill);
     instance.drawRect(newProps.x, newProps.y, newProps.width, newProps.height);
     instance.endFill();
 
