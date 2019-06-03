@@ -1,4 +1,4 @@
-import {Cell, emptyCell} from "./Cell";
+import { Cell, emptyCell } from "./Cell";
 
 export type GameOfLifeState = {
   rows: number;
@@ -6,7 +6,10 @@ export type GameOfLifeState = {
   cells: Cell[][];
 };
 
-export const getEmptyGameOfLifeState = (rows: number, cols: number): GameOfLifeState => {
+export const getEmptyGameOfLifeState = (
+  rows: number,
+  cols: number
+): GameOfLifeState => {
   let cells: Cell[][] = [];
   for (let col = 0; col < cols; col++) {
     cells.push([]); // initial row preparation
@@ -19,10 +22,13 @@ export const getEmptyGameOfLifeState = (rows: number, cols: number): GameOfLifeS
     rows,
     cols,
     cells
-  }
+  };
 };
 
-export const getRandomGameOfLifeState = (rows: number, cols: number): GameOfLifeState => {
+export const getRandomGameOfLifeState = (
+  rows: number,
+  cols: number
+): GameOfLifeState => {
   let cells: Cell[][] = [];
   for (let col = 0; col < cols; col++) {
     cells.push([]); // initial row preparation
@@ -35,5 +41,5 @@ export const getRandomGameOfLifeState = (rows: number, cols: number): GameOfLife
     rows,
     cols,
     cells
-  }
+  };
 };
