@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Pixi.js v4 document
+
+http://pixijs.download/v4.8.8/docs/index.html
+
 ## Available Scripts
 
 In the project directory, you can run:
