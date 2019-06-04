@@ -5,6 +5,7 @@ import {
 } from "./structures/GameOfLifeState";
 import { useConwaysGameOfLife } from "./hooks/useConwaysGameOfLife";
 import { Field } from "./components/Field";
+import {useCellularAutomaton} from "./hooks/useCellularAutomaton";
 
 const SIZE = 100;
 const CELL_SIZE = 4;
@@ -30,74 +31,16 @@ export const App: React.FC = () => {
       setStat(nextStat);
     }
   }, [running, generation, evolve]);
-
-  const handleChangePreset = useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      switch (event.target.value) {
-        case "Replicator": {
-          setBorn("1357");
-          setSurvive("1357");
-          break;
-        }
-        case "Seeds": {
-          setBorn("2");
-          setSurvive("");
-          break;
-        }
-        case "B25/S4": {
-          setBorn("25");
-          setSurvive("4");
-          break;
-        }
-        case "Life without Death": {
-          setBorn("3");
-          setSurvive("012345678");
-          break;
-        }
-        case "Life": {
-          setBorn("3");
-          setSurvive("23");
-          break;
-        }
-        case "34 Life": {
-          setBorn("34");
-          setSurvive("34");
-          break;
-        }
-        case "Diamoeba": {
-          setBorn("35678");
-          setSurvive("5678");
-          break;
-        }
-        case "2x2": {
-          setBorn("36");
-          setSurvive("125");
-          break;
-        }
-        case "HighLife": {
-          setBorn("36");
-          setSurvive("23");
-          break;
-        }
-        case "Day & Night": {
-          setBorn("3678");
-          setSurvive("34678");
-          break;
-        }
-        case "Morley": {
-          setBorn("368");
-          setSurvive("245");
-          break;
-        }
-        case "Anneal": {
-          setBorn("4678");
-          setSurvive("35678");
-          break;
-        }
-      }
-    },
-    []
-  );
+  const { getPreset } = useCellularAutomaton();
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    const result = getPreset(value);
+    if (result) {
+      const [pBorn, pSurvive] = result;
+      setBorn(pBorn);
+      setSurvive(pSurvive);
+    }
+  }, [getPreset]);
 
   return (
     <div>
@@ -142,7 +85,7 @@ export const App: React.FC = () => {
       </div>
       <div>
         Preset:{" "}
-        <select onChange={handleChangePreset}>
+        <select onChange={handleChange}>
           <option value="" />
           <option value="Replicator">Replicator</option>
           <option value="Seeds">Seeds</option>
