@@ -1341,7 +1341,7 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.2.tgz#3452a24edf9fea138b48fad4a0a028a683da1e40"
   integrity sha512-5tabW/i+9mhrfEOUcLDu2xBPsHJ+X5Orqy9FKpale3SjDA17j5AEpYq5vfy3oAeAHGcvANRCO3NV3d2D6q3NiA==
 
-"@types/pixi.js@^4.8.7":
+"@types/pixi.js@4.8.7":
   version "4.8.7"
   resolved "https://registry.yarnpkg.com/@types/pixi.js/-/pixi.js-4.8.7.tgz#23cea9ce7aaf6a51223a8fbe3c3d1c89f6048698"
   integrity sha512-SuaeAVDWNbvVzg+ipVrNzVxMDZHaa/MRNT/+Y270sYp/qxfB31KC1wEt7KDVNq9Ac/pRdSDrxVDcLDUaYn0aVg==
