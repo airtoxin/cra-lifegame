@@ -1,5 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
-import {getEmptyGameOfLifeState, getRandomGameOfLifeState} from "./structures/GameOfLifeState";
+import {
+  getEmptyGameOfLifeState,
+  getRandomGameOfLifeState
+} from "./structures/GameOfLifeState";
 import { useConwaysGameOfLife } from "./hooks/useConwaysGameOfLife";
 import { Field } from "./components/Field";
 
@@ -9,18 +12,24 @@ const CELL_SIZE = 4;
 export const App: React.FC = () => {
   const [generation, setGeneration] = useState(1);
   const [running, setRunning] = useState(false);
-  const [state, setState] = useState(getRandomGameOfLifeState(SIZE, SIZE));
+  const [density, setDensity] = useState(0.5);
+  const [state, setState] = useState(
+    getRandomGameOfLifeState(SIZE, SIZE, density)
+  );
   const [born, setBorn] = useState("3");
   const [survive, setSurvive] = useState("23");
   const ruleString = `B${born}/S${survive}`;
   const { evolve } = useConwaysGameOfLife(state, ruleString);
+  const [stat, setStat] = useState({ born: 0, survive: 0, dead: 0 });
 
   useEffect(() => {
     if (running) {
       setGeneration(generation + 1);
-      setState(evolve());
+      const { state: nextState, stat: nextStat } = evolve();
+      setState(nextState);
+      setStat(nextStat);
     }
-  }, [running, generation]);
+  }, [running, generation, evolve]);
 
   const handleChangePreset = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -103,16 +112,34 @@ export const App: React.FC = () => {
       <button onClick={() => setRunning(!running)}>
         {running ? "stop" : "start"}
       </button>
-      <button onClick={() => {
-        setState(getRandomGameOfLifeState(SIZE, SIZE));
-        setGeneration(1);
-      }}>
+      <button
+        onClick={() => {
+          setState(getRandomGameOfLifeState(SIZE, SIZE, density));
+          setGeneration(1);
+        }}
+      >
         reset
       </button>
-      <button onClick={() => {
-        setState(getEmptyGameOfLifeState(SIZE, SIZE));
-        setGeneration(1);
-      }}>initialize</button>
+      <button
+        onClick={() => {
+          setState(getEmptyGameOfLifeState(SIZE, SIZE));
+          setGeneration(1);
+        }}
+      >
+        initialize
+      </button>
+      <div>
+        Density: {density}
+        <br />
+        <input
+          type="range"
+          min={0}
+          max={1}
+          step={0.01}
+          value={density}
+          onChange={e => setDensity(Number(e.target.value))}
+        />
+      </div>
       <div>
         Preset:{" "}
         <select onChange={handleChangePreset}>
@@ -149,6 +176,13 @@ export const App: React.FC = () => {
       </div>
 
       <div>gen: {generation}</div>
+      <div>
+        <div>Stat</div>
+        <div>Born: {stat.born}</div>
+        <div>Survive: {stat.survive}</div>
+        <div>Dead: {stat.dead}</div>
+        <div>Total: {stat.born + stat.survive + stat.dead}</div>
+      </div>
     </div>
   );
 };

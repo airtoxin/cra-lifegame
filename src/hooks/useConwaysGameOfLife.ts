@@ -2,6 +2,12 @@ import { GameOfLifeState } from "../structures/GameOfLifeState";
 import { useCallback, useMemo } from "react";
 import { Cell, cellProperties } from "../structures/Cell";
 
+export type Stat = {
+  born: number;
+  survive: number;
+  dead: number;
+};
+
 const neighbourCellCoordinates = [
   [-1, -1],
   [0, -1],
@@ -28,9 +34,12 @@ export const useConwaysGameOfLife = (
   state: GameOfLifeState,
   ruleString: string
 ) => {
-  const evolve = useCallback((): GameOfLifeState => {
+  const evolve = useCallback((): { stat: Stat; state: GameOfLifeState } => {
     const getNext = parseRuleString(ruleString);
     let newCells = [];
+    let born = 0;
+    let survive = 0;
+    let dead = 0;
 
     for (let row = 0; row < state.rows; row++) {
       let rowCells = [];
@@ -43,18 +52,41 @@ export const useConwaysGameOfLife = (
             ];
           sum += cell[cellProperties.Value];
         }
-        const newCell: Cell = [
-          getNext(state.cells[row][col][cellProperties.Value], sum)
+        const currentCell = state.cells[row][col];
+        const nextCell: Cell = [
+          getNext(currentCell[cellProperties.Value], sum)
         ];
-        rowCells.push(newCell);
+        rowCells.push(nextCell);
+        // stat
+        if (
+          currentCell[cellProperties.Value] === 0 &&
+          nextCell[cellProperties.Value] === 1
+        ) {
+          born += 1;
+        } else if (
+          currentCell[cellProperties.Value] === 1 &&
+          nextCell[cellProperties.Value] === 0
+        ) {
+          dead += 1;
+        } else {
+          survive += 1;
+        }
       }
       newCells.push(rowCells);
     }
+    const stat = {
+      born,
+      survive,
+      dead
+    };
 
     return {
-      rows: state.rows,
-      cols: state.cols,
-      cells: newCells
+      state: {
+        rows: state.rows,
+        cols: state.cols,
+        cells: newCells
+      },
+      stat
     };
   }, [state, ruleString]);
 

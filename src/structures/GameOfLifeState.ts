@@ -27,13 +27,14 @@ export const getEmptyGameOfLifeState = (
 
 export const getRandomGameOfLifeState = (
   rows: number,
-  cols: number
+  cols: number,
+  density: number = 0.5
 ): GameOfLifeState => {
   let cells: Cell[][] = [];
   for (let col = 0; col < cols; col++) {
     cells.push([]); // initial row preparation
     for (let row = 0; row < rows; row++) {
-      cells[col][row] = [~~(Math.random() < 0.5) as 0 | 1];
+      cells[col][row] = [~~(Math.random() < density) as 0 | 1];
     }
   }
 
