@@ -44,8 +44,8 @@ export const App: React.FC = () => {
   }, [getPreset]);
 
   return (
-    <div className={css({ display: "flex" })}>
-      <div>
+    <div className={grid}>
+      <div className="controls">
         <button onClick={() => setRunning(!running)}>
           {running ? "stop" : "start"}
         </button>
@@ -112,8 +112,7 @@ export const App: React.FC = () => {
           />
         </div>
       </div>
-
-      <div>
+      <div className="app">
         <Field
           canvas={{
             width: SIZE * CELL_SIZE,
@@ -122,17 +121,36 @@ export const App: React.FC = () => {
           cellSize={CELL_SIZE}
           state={state}
         />
+      </div>
+      <div className="stats">
+        <div>gen: {generation}</div>
         <div>
-          <div>gen: {generation}</div>
-          <div>
-            <div>Stat</div>
-            <div>Born: {stat.born}</div>
-            <div>Survive: {stat.survive}</div>
-            <div>Dead: {stat.dead}</div>
-            <div>Total: {stat.born + stat.survive + stat.dead}</div>
-          </div>
+          <div>Stat</div>
+          <div>Born: {stat.born}</div>
+          <div>Survive: {stat.survive}</div>
+          <div>Dead: {stat.dead}</div>
+          <div>Total: {stat.born + stat.survive + stat.dead}</div>
         </div>
       </div>
     </div>
   );
 };
+
+const grid = css({
+  display: "grid",
+  gridTemplateColumns: "12em 1fr",
+  gridTemplateRows: "1fr 16em",
+  gridTemplateAreas: `"controls app" "controls stats"`,
+
+  ".controls": {
+    gridArea: "controls"
+  },
+
+  ".app": {
+    gridArea: "app"
+  },
+
+  ".stats": {
+    gridArea: "stats"
+  }
+});
