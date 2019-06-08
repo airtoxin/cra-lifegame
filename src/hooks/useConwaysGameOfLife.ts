@@ -64,7 +64,6 @@ export const useConwaysGameOfLife = (
         ) {
           born += 1;
         } else if (
-          currentCell[cellProperties.Value] === 1 &&
           nextCell[cellProperties.Value] === 0
         ) {
           dead += 1;
