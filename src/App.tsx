@@ -1,12 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
-import {
-  getEmptyGameOfLifeState,
-  getRandomGameOfLifeState
-} from "./structures/GameOfLifeState";
-import { useConwaysGameOfLife } from "./hooks/useConwaysGameOfLife";
-import { Field } from "./components/Field";
+import React, {useCallback, useEffect, useState} from "react";
+import {getEmptyGameOfLifeState, getRandomGameOfLifeState} from "./structures/GameOfLifeState";
+import {useConwaysGameOfLife} from "./hooks/useConwaysGameOfLife";
+import {Field} from "./components/Field";
 import {useCellularAutomaton} from "./hooks/useCellularAutomaton";
 import {css} from "emotion";
+import {Stats} from "./components/Stats";
 
 const SIZE = 100;
 const CELL_SIZE = 4;
@@ -33,15 +31,18 @@ export const App: React.FC = () => {
     }
   }, [running, generation, evolve]);
   const { getPreset } = useCellularAutomaton();
-  const handleChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
-    const result = getPreset(value);
-    if (result) {
-      const [pBorn, pSurvive] = result;
-      setBorn(pBorn);
-      setSurvive(pSurvive);
-    }
-  }, [getPreset]);
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      const value = event.target.value;
+      const result = getPreset(value);
+      if (result) {
+        const [pBorn, pSurvive] = result;
+        setBorn(pBorn);
+        setSurvive(pSurvive);
+      }
+    },
+    [getPreset]
+  );
 
   return (
     <div className={grid}>
@@ -112,6 +113,7 @@ export const App: React.FC = () => {
           />
         </div>
       </div>
+
       <div className="app">
         <Field
           canvas={{
@@ -122,15 +124,12 @@ export const App: React.FC = () => {
           state={state}
         />
       </div>
+
       <div className="stats">
-        <div>gen: {generation}</div>
-        <div>
-          <div>Stat</div>
-          <div>Born: {stat.born}</div>
-          <div>Survive: {stat.survive}</div>
-          <div>Dead: {stat.dead}</div>
-          <div>Total: {stat.born + stat.survive + stat.dead}</div>
-        </div>
+        <Stats
+          generation={generation}
+          stat={stat}
+        />
       </div>
     </div>
   );
