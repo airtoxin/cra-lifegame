@@ -16,12 +16,22 @@ export const Stats: React.FunctionComponent<Props> = ({ generation, stat }) => {
       const context = canvasRef.current.getContext("2d");
       if (context) {
         const imageData = context.getImageData(
-          1,
+          PIXEL_SIZE,
           0,
           context.canvas.width,
           context.canvas.height
         );
         context.putImageData(imageData, 0, 0);
+
+        if (generation === 1 || generation % 100 === 0) {
+          context.fillStyle = "white";
+          context.fillRect(
+            context.canvas.width - PIXEL_SIZE,
+            0,
+            context.canvas.width - PIXEL_SIZE,
+            context.canvas.height
+          );
+        }
 
         const basePixel =
           context.canvas.height / (stat.born + stat.survive + stat.dead);
@@ -54,7 +64,7 @@ export const Stats: React.FunctionComponent<Props> = ({ generation, stat }) => {
         );
       }
     }
-  }, [stat]);
+  }, [generation, stat]);
 
   return (
     <>
