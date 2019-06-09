@@ -30,7 +30,7 @@ const parseRuleString = (rule: string) => {
       : (~~bornString.includes(counts.toString()) as 0 | 1);
 };
 
-export const useConwaysGameOfLife = (
+export const useCellularAutomaton = (
   state: GameOfLifeState,
   ruleString: string
 ) => {

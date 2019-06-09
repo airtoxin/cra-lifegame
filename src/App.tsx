@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getRandomGameOfLifeState } from "./structures/GameOfLifeState";
-import { useConwaysGameOfLife } from "./hooks/useConwaysGameOfLife";
+import { useCellularAutomaton } from "./hooks/useConwaysGameOfLife";
 import { Field } from "./components/Field";
 import { css } from "emotion";
 import { Stats } from "./components/Stats";
@@ -19,7 +19,7 @@ export const App: React.FC = () => {
   const [born, setBorn] = useState("3");
   const [survive, setSurvive] = useState("23");
   const ruleString = `B${born}/S${survive}`;
-  const { evolve } = useConwaysGameOfLife(state, ruleString);
+  const { evolve } = useCellularAutomaton(state, ruleString);
   const [stat, setStat] = useState({ born: 0, survive: 0, dead: 0 });
 
   useEffect(() => {
