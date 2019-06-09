@@ -1,10 +1,13 @@
-import React, {useCallback, useEffect, useState} from "react";
-import {getEmptyGameOfLifeState, getRandomGameOfLifeState} from "./structures/GameOfLifeState";
-import {useConwaysGameOfLife} from "./hooks/useConwaysGameOfLife";
-import {Field} from "./components/Field";
-import {useCellularAutomaton} from "./hooks/useCellularAutomaton";
-import {css} from "emotion";
-import {Stats} from "./components/Stats";
+import React, { useEffect, useState } from "react";
+import {
+  getEmptyGameOfLifeState,
+  getRandomGameOfLifeState
+} from "./structures/GameOfLifeState";
+import { useConwaysGameOfLife } from "./hooks/useConwaysGameOfLife";
+import { Field } from "./components/Field";
+import { css } from "emotion";
+import { Stats } from "./components/Stats";
+import { Controls } from "./components/Controls";
 
 const SIZE = 100;
 const CELL_SIZE = 4;
@@ -30,88 +33,24 @@ export const App: React.FC = () => {
       setStat(nextStat);
     }
   }, [running, generation, evolve]);
-  const { getPreset } = useCellularAutomaton();
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const value = event.target.value;
-      const result = getPreset(value);
-      if (result) {
-        const [pBorn, pSurvive] = result;
-        setBorn(pBorn);
-        setSurvive(pSurvive);
-      }
-    },
-    [getPreset]
-  );
 
   return (
     <div className={grid}>
       <div className="controls">
-        <button onClick={() => setRunning(!running)}>
-          {running ? "stop" : "start"}
-        </button>
-        <button
-          onClick={() => {
+        <Controls
+          running={running}
+          onChangeRunning={setRunning}
+          onReset={() => {
             setState(getRandomGameOfLifeState(SIZE, SIZE, density));
             setGeneration(1);
           }}
-        >
-          reset
-        </button>
-        <button
-          onClick={() => {
-            setState(getEmptyGameOfLifeState(SIZE, SIZE));
-            setGeneration(1);
-          }}
-        >
-          initialize
-        </button>
-        <div>
-          Density: {density}
-          <br />
-          <input
-            type="range"
-            min={0}
-            max={1}
-            step={0.01}
-            value={density}
-            onChange={e => setDensity(Number(e.target.value))}
-          />
-        </div>
-        <div>
-          Preset:{" "}
-          <select onChange={handleChange}>
-            <option value="" />
-            <option value="Replicator">Replicator</option>
-            <option value="Seeds">Seeds</option>
-            <option value="B25/S4">B25/S4</option>
-            <option value="Life without Death">Life without Death</option>
-            <option value="Life">Life</option>
-            <option value="34 Life">34 Life</option>
-            <option value="Diamoeba">Diamoeba</option>
-            <option value="2x2">2x2</option>
-            <option value="HighLife">HighLife</option>
-            <option value="Day & Night">Day & Night</option>
-            <option value="Morley">Morley</option>
-            <option value="Anneal">Anneal</option>
-          </select>
-        </div>
-        <div>
-          Born:{" "}
-          <input
-            type="text"
-            value={born}
-            onChange={e => setBorn(e.target.value)}
-          />
-        </div>
-        <div>
-          Survive{" "}
-          <input
-            type="text"
-            value={survive}
-            onChange={e => setSurvive(e.target.value)}
-          />
-        </div>
+          density={density}
+          onChangeDensity={setDensity}
+          born={born}
+          onChangeBorn={setBorn}
+          survive={survive}
+          onChangeSurvive={setSurvive}
+        />
       </div>
 
       <div className="app">
@@ -126,10 +65,7 @@ export const App: React.FC = () => {
       </div>
 
       <div className="stats">
-        <Stats
-          generation={generation}
-          stat={stat}
-        />
+        <Stats generation={generation} stat={stat} />
       </div>
     </div>
   );

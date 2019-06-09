@@ -1,9 +1,9 @@
 import React from "react";
-import {Stat} from "../hooks/useConwaysGameOfLife";
+import { Stat } from "../hooks/useConwaysGameOfLife";
 
 export interface Props {
-  generation: number,
-  stat: Stat
+  generation: number;
+  stat: Stat;
 }
 
 export const Stats: React.FunctionComponent<Props> = ({ generation, stat }) => {
@@ -16,6 +16,7 @@ export const Stats: React.FunctionComponent<Props> = ({ generation, stat }) => {
         <div>Survive: {stat.survive}</div>
         <div>Dead: {stat.dead}</div>
         <div>Total: {stat.born + stat.survive + stat.dead}</div>
-      </div></>
+      </div>
+    </>
   );
 };
