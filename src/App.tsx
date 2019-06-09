@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from "react";
-import {
-  getEmptyGameOfLifeState,
-  getRandomGameOfLifeState
-} from "./structures/GameOfLifeState";
+import { getRandomGameOfLifeState } from "./structures/GameOfLifeState";
 import { useConwaysGameOfLife } from "./hooks/useConwaysGameOfLife";
 import { Field } from "./components/Field";
 import { css } from "emotion";
 import { Stats } from "./components/Stats";
 import { Controls } from "./components/Controls";
 
-const SIZE = 100;
 const CELL_SIZE = 4;
 
 export const App: React.FC = () => {
+  const [size, setSize] = useState(100);
   const [generation, setGeneration] = useState(1);
   const [running, setRunning] = useState(false);
   const [density, setDensity] = useState(0.5);
   const [state, setState] = useState(
-    getRandomGameOfLifeState(SIZE, SIZE, density)
+    getRandomGameOfLifeState(size, size, density)
   );
   const [born, setBorn] = useState("3");
   const [survive, setSurvive] = useState("23");
@@ -38,10 +35,12 @@ export const App: React.FC = () => {
     <div className={grid}>
       <div className="controls">
         <Controls
+          size={size}
+          onChangeSize={setSize}
           running={running}
           onChangeRunning={setRunning}
           onReset={() => {
-            setState(getRandomGameOfLifeState(SIZE, SIZE, density));
+            setState(getRandomGameOfLifeState(size, size, density));
             setGeneration(1);
           }}
           density={density}
@@ -56,8 +55,8 @@ export const App: React.FC = () => {
       <div className="app">
         <Field
           canvas={{
-            width: SIZE * CELL_SIZE,
-            height: SIZE * CELL_SIZE
+            width: size * CELL_SIZE,
+            height: size * CELL_SIZE
           }}
           cellSize={CELL_SIZE}
           state={state}

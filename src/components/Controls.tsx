@@ -1,6 +1,8 @@
 import React from "react";
 
 export interface Props {
+  size: number;
+  onChangeSize: (size: number) => void;
   running: boolean;
   onChangeRunning: (running: boolean) => void;
   onReset: () => void;
@@ -13,6 +15,8 @@ export interface Props {
 }
 
 export const Controls: React.FunctionComponent<Props> = ({
+  size,
+  onChangeSize,
   running,
   onChangeRunning,
   onReset,
@@ -79,6 +83,15 @@ export const Controls: React.FunctionComponent<Props> = ({
           type="text"
           value={survive}
           onChange={e => onChangeSurvive(e.target.value)}
+        />
+      </div>
+      <hr />
+      <div>
+        Board size{" "}
+        <input
+          type="number"
+          value={size}
+          onChange={e => onChangeSize(Number(e.target.value))}
         />
       </div>
     </>
