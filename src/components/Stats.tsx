@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Stat } from "../hooks/useConwaysGameOfLife";
+import { Stat } from "../structures/Stat";
 
 export interface Props {
   generation: number;

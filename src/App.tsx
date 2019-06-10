@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getRandomGameOfLifeState } from "./structures/GameOfLifeState";
-import { useCellularAutomaton } from "./hooks/useConwaysGameOfLife";
+import { useCellularAutomaton } from "./hooks/useCellularAutomaton";
 import { Field } from "./components/Field";
 import { css } from "emotion";
 import { Stats } from "./components/Stats";

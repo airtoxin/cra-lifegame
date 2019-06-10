@@ -1,12 +1,7 @@
 import { GameOfLifeState } from "../structures/GameOfLifeState";
 import { useCallback, useMemo } from "react";
 import { Cell, cellProperties } from "../structures/Cell";
-
-export type Stat = {
-  born: number;
-  survive: number;
-  dead: number;
-};
+import { Stat } from "../structures/Stat";
 
 const neighbourCellCoordinates = [
   [-1, -1],
