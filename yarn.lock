@@ -999,10 +999,10 @@
   dependencies:
     "@hapi/hoek" "6.x.x"
 
-"@inlet/react-pixi@0.5.11":
-  version "0.5.11"
-  resolved "https://registry.yarnpkg.com/@inlet/react-pixi/-/react-pixi-0.5.11.tgz#5a83c6cb428637a8eca8e144fd9949604092bf24"
-  integrity sha512-H85Q0duZP/jnqM0bZKTf3NuC3qB4NkSHPG+v8ekGButZ0La8j4eR5E8SKpzrNlJmI+wEesOzyjKGIZcfAcu1Wg==
+"@inlet/react-pixi@0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@inlet/react-pixi/-/react-pixi-0.6.0.tgz#a369cf155d44a537051a2ebc010deeee425ebfa5"
+  integrity sha512-wQzgosiQ+EirTDYcQ2UyGaNMEymCD5n+NGira5bh3uPmTY3YSqgUKDusEyOd4l49z4PndlnwMgXAgXAwZWrtqA==
   dependencies:
     fbjs "^1.0.0"
     performance-now "^2.1.0"
