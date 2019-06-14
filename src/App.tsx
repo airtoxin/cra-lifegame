@@ -1,35 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { getRandomGameOfLifeState } from "./structures/GameOfLifeState";
-import { useCellularAutomaton } from "./hooks/useCellularAutomaton";
 import { Field } from "./components/Field";
 import { css } from "emotion";
 import { Stats } from "./components/Stats";
 import { Controls } from "./components/Controls";
+import { useLifeLikeCellularAutomaton } from "./hooks/useLifeLikeCellularAutomaton";
+import { useBornSurviveRule } from "./hooks/useBornSurviveRule";
 
 const CELL_SIZE = 4;
 
 export const App: React.FC = () => {
   const [size, setSize] = useState(100);
-  const [generation, setGeneration] = useState(1);
   const [running, setRunning] = useState(false);
-  const [density, setDensity] = useState(0.5);
-  const [state, setState] = useState(
-    getRandomGameOfLifeState(size, size, density)
-  );
-  const [born, setBorn] = useState("3");
-  const [survive, setSurvive] = useState("23");
-  const ruleString = `B${born}/S${survive}`;
-  const { evolve } = useCellularAutomaton(state, ruleString);
-  const [stat, setStat] = useState({ born: 0, survive: 0, dead: 0 });
+  const {
+    born,
+    setBorn,
+    survive,
+    setSurvive,
+    ruleString
+  } = useBornSurviveRule();
+
+  const {
+    evolve,
+    reset,
+    generation,
+    state,
+    stat,
+    density,
+    setDensity
+  } = useLifeLikeCellularAutomaton(size, ruleString);
 
   useEffect(() => {
     if (running) {
-      setGeneration(generation + 1);
-      const { state: nextState, stat: nextStat } = evolve();
-      setState(nextState);
-      setStat(nextStat);
+      evolve();
     }
-  }, [running, generation, evolve]);
+  }, [running, evolve]);
 
   return (
     <div className={grid}>
@@ -39,10 +43,7 @@ export const App: React.FC = () => {
           onChangeSize={setSize}
           running={running}
           onChangeRunning={setRunning}
-          onReset={() => {
-            setState(getRandomGameOfLifeState(size, size, density));
-            setGeneration(1);
-          }}
+          onReset={reset}
           density={density}
           onChangeDensity={setDensity}
           born={born}
