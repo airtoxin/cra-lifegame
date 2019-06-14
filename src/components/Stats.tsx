@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Stat } from "../structures/Stat";
 
 export interface Props {
@@ -10,6 +10,8 @@ const PIXEL_SIZE = 2;
 
 export const Stats: React.FunctionComponent<Props> = ({ generation, stat }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [canvasWidth, setCanvasWidth] = useState(1);
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -66,12 +68,19 @@ export const Stats: React.FunctionComponent<Props> = ({ generation, stat }) => {
     }
   }, [generation, stat]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (containerRef.current) {
+      setCanvasWidth(containerRef.current.clientWidth);
+    }
+  });
+
   return (
     <>
-      <div>
+      <div ref={containerRef} style={{ width: "100%" }}>
         <canvas
           ref={canvasRef}
-          width={500}
+          width={canvasWidth}
           height={300}
           style={{ backgroundColor: "black" }}
         />
