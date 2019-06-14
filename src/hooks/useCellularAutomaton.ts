@@ -1,5 +1,5 @@
 import { GameOfLifeState } from "../structures/GameOfLifeState";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { Cell, cellProperties } from "../structures/Cell";
 import { Stat } from "../structures/Stat";
 
