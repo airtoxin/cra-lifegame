@@ -999,15 +999,15 @@
   dependencies:
     "@hapi/hoek" "6.x.x"
 
-"@inlet/react-pixi@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@inlet/react-pixi/-/react-pixi-0.7.0.tgz#a3815c4e927704a9183eb1742d114d28aa7b2871"
-  integrity sha512-voTsANrgX9LbueSz6JgG/GWKhEAGYTBP4q7UV9Ko/objppMcwMeK1oImO7u290/3YU6w+H0Nu7hEXlJNha9v2g==
+"@inlet/react-pixi@0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@inlet/react-pixi/-/react-pixi-0.7.1.tgz#7f2b2b8d98b985f1d866277d641f4c85c6db564b"
+  integrity sha512-G6/LnOI/k9ys+TlqOhjyAmUH3UP6s2Vh7X8fMK8yqkjuh3BEzQXQ5m1gqUHupaAMKr2vvmQstRODtA+cv0PDHA==
   dependencies:
     fbjs "^1.0.0"
     performance-now "^2.1.0"
-    react-reconciler "^0.20.4"
-    scheduler "^0.14.0"
+    react-reconciler "0.19.0"
+    scheduler "0.13.0"
 
 "@jest/console@^24.7.1":
   version "24.7.1"
@@ -8247,15 +8247,15 @@ react-popper@^1.3.3:
     typed-styles "^0.0.7"
     warning "^4.0.2"
 
-react-reconciler@^0.20.4:
-  version "0.20.4"
-  resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.20.4.tgz#3da6a95841592f849cb4edd3d38676c86fd920b2"
-  integrity sha512-kxERc4H32zV2lXMg/iMiwQHOtyqf15qojvkcZ5Ja2CPkjVohHw9k70pdDBwrnQhLVetUJBSYyqU3yqrlVTOajA==
+react-reconciler@0.19.0:
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.19.0.tgz#f07baeb1af315b48e24876f3d2fb4a3a0b09e113"
+  integrity sha512-Co71ax30hH7dCsXDDsviqPB8HxeUuhRUyOU9CHmwljewDx4J51t9VVwRMxpehmbO0UmQFuhHC0+djp0OxvmGOw==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    scheduler "^0.13.6"
+    scheduler "^0.13.0"
 
 react-scripts@3.0.1:
   version "3.0.1"
@@ -8768,18 +8768,18 @@ saxes@^3.1.9:
   dependencies:
     xmlchars "^1.3.1"
 
-scheduler@^0.13.6:
-  version "0.13.6"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.13.6.tgz#466a4ec332467b31a91b9bf74e5347072e4cd889"
-  integrity sha512-IWnObHt413ucAYKsD9J1QShUKkbKLQQHdxRyw73sw4FN26iWr3DY/H34xGPe4nmL1DwXyWmSWmMrA9TfQbE/XQ==
+scheduler@0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.13.0.tgz#e701f62e1b3e78d2bbb264046d4e7260f12184dd"
+  integrity sha512-w7aJnV30jc7OsiZQNPVmBc+HooZuvQZIZIShKutC3tnMFMkcwVN9CZRRSSNw03OnSCKmEkK8usmwcw6dqBaLzw==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
-scheduler@^0.14.0:
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.14.0.tgz#b392c23c9c14bfa2933d4740ad5603cc0d59ea5b"
-  integrity sha512-9CgbS06Kki2f4R9FjLSITjZo5BZxPsryiRNyL3LpvrM9WxcVmhlqAOc9E+KQbeI2nqej4JIIbOsfdL51cNb4Iw==
+scheduler@^0.13.0, scheduler@^0.13.6:
+  version "0.13.6"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.13.6.tgz#466a4ec332467b31a91b9bf74e5347072e4cd889"
+  integrity sha512-IWnObHt413ucAYKsD9J1QShUKkbKLQQHdxRyw73sw4FN26iWr3DY/H34xGPe4nmL1DwXyWmSWmMrA9TfQbE/XQ==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
